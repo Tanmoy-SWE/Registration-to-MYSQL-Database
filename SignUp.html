@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GameTime: Create an Account</title>
+    <link rel="stylesheet" href="Sign-Up-CSS.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/be05e04130.js"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
+
+
+<body class="background-signup">
+    <nav class="navbar bg-dark navbar-expand-xl sticky-top">
+
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="../index.html" class="navbar-brand"><img src="../images/logo.png" alt="Homepage" width="100"
+                        height="100"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Fixtures</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Standings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Leaderboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">News</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+            </li>
+        </ul>
+    </nav>
+
+
+
+    <div class="center">
+        <div style="margin-top: 50px; margin-bottom: 50px;">
+            <h1 style="text-align:center; color: white; font-size: 50px;">Create Your Account</h1>
+        </div>
+        <div class="regform ">
+            <form class='Sign-up' method="post" onsubmit="return false;" id="singUpForm">
+                <table>
+                    <tr>
+                        <td>
+                            <p class="form-elements">First Name: </p>
+                        </td>
+                        <td>
+                            <p class="inputs"><input type="text" name="first_name" placeholder="Enter First Name" id="firstname"
+                                    style="margin-left: 40px; margin-right: auto;"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="form-elements">Last Name: </p>
+                        </td>
+                        <td>
+                            <p class="inputs"><input type="text" name="last_name" placeholder="Enter Last Name" id="lastname"
+                                    style="margin-left: 40px; margin-right: auto;"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="form-elements">Email: </p>
+                        </td>
+                        <td>
+                            <p class="inputs"><input type="email" name="email" placeholder="Enter Email" id="email"
+                                    style="margin-left: 40px; margin-right: auto;"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="form-elements">Date of Birth: </p>
+                        </td>
+                        <td>
+                            <p class="inputs"><input type="date" name="DOB" placeholder="Enter Date Of Birth" id="date"
+                                    style="margin-left: 40px; margin-right: auto;"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="form-elements">Password: </p>
+                        </td>
+                        <td>
+                            <p class="inputs"><input type="password" name="password" placeholder="Enter Password"
+                                    style="margin-left: 40px; margin-right: auto;"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="form-elements">Re-Confirm Password: </p>
+                        </td>
+                        <td>
+                            <p class="inputs">
+                                <input type="password" name="confirm_password" placeholder="Enter Password"
+                                    style="margin-left: 40px; margin-right: auto;">
+                                <input type="submit" name=""
+                                    value="Sign Up" id="signup-button" class="signup-button">
+                            </p>
+                    </tr>
+                </table>
+                <div style="margin-left: 200px; margin-top: 50px;">
+                    <a href="#" class="action-links">Back to Login Page</a>
+                </div>
+
+            </form>
+        </div>
+
+        <script language="javascript">
+            $(document).ready(function() {
+                $("#signup-button").click(function () {
+                    var formData = {                        
+                    };
+                    var keys = ["first_name", "last_name", "email", "password", "confirm_password", "DOB"];
+                    for(let k of keys) {
+                        formData[k] = $("input[name='"+k+"']").val();
+                    }
+                    $.ajax({
+                        url: "http://localhost:3005/insertUser", 
+                        type: 'post',
+                        dataType: 'json',
+                        data: JSON.stringify(formData),
+                        contentType: 'application/json',
+                        success: function(result){
+                            alert("success");
+                            console.log(result);
+                        }
+                    });
+                    console.log(formData);
+                })
+            })
+
+        </script>
+    </div>
+
+</body>
